@@ -31,8 +31,14 @@ const authenticateToken = (req, res, next) => {
 };
 
 const todoSchema = new mongoose.Schema({
-    Title: String,
-    Description: String,
+    Title: {
+        type: String,
+        required: true,
+    },
+    Description:  {
+        type: String,
+        required: true,
+    },
     isComplete: {
         type: Boolean,
         default: false // Default value for new todos
@@ -162,7 +168,7 @@ app.post("/users/login", async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(401).json({ error: "Invalid username or password" });
+            return res.status(401).json({ error: "Invalid Email" });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
