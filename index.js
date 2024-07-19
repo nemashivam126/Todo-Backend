@@ -33,11 +33,11 @@ const authenticateToken = (req, res, next) => {
 const todoSchema = new mongoose.Schema({
     Title: {
         type: String,
-        required: true,
+        required: [true, 'Title is required'],
+        trim: true, // Removes leading and trailing spaces
     },
     Description:  {
-        type: String,
-        required: true,
+        type: String
     },
     isComplete: {
         type: Boolean,
@@ -52,9 +52,21 @@ const todoSchema = new mongoose.Schema({
 const Todo = mongoose.model('Todo', todoSchema);
 
 const userSchema = new mongoose.Schema({
-    username: String,
-    email: String,
-    password: String
+    username: {
+        type: String,
+        required: [true, 'Username is required'],
+        trim: true,
+    },
+    email: {
+        type: String,
+        required: [true, 'Email is required'],
+        trim: true,
+    },
+    password: {
+        type: String,
+        required: [true, 'Password is required'],
+        trim: true,
+    }
 });
 const User = mongoose.model('User', userSchema);
 
