@@ -42,7 +42,7 @@ const todoSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     }
-});
+}, { timestamps: true });
 const Todo = mongoose.model('Todo', todoSchema);
 
 const userSchema = new mongoose.Schema({
