@@ -166,7 +166,7 @@ app.post("/users/register", async (req, res) => {
         const user = new User({ username, email, password: hashedPassword });
         await user.save();
 
-        const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '24h' });
 
         res.status(201).json({ user, token, message: "User registered successfully" });
     } catch (error) {
@@ -188,7 +188,7 @@ app.post("/users/login", async (req, res) => {
             return res.status(401).json({ error: "Invalid password" });
         }
 
-        const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '24h' });
 
         res.json({ user, token, message: "Login successful" });
     } catch (error) {
